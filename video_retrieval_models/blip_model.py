@@ -10,7 +10,7 @@ from primitives.caption import Caption
 from primitives.corpus import Corpus
 from primitives.document import Document
 from rank_bm25 import BM25Okapi
-from utils import load_video_into_images
+from utils.video_to_images import load_video_into_images
 
 from video_retrieval_models.common import VideoRetrievalModel
 
