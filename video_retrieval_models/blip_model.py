@@ -77,4 +77,4 @@ class BlipBM25Model(VideoRetrievalModel):
         caption_scores = doc_bm25.get_scores(tokenized_query)
         selected_caption = selected_doc[np.argmax(caption_scores)]
 
-        return selected_doc.name, selected_caption[1]
+        return selected_doc.video_path, selected_caption[1]
