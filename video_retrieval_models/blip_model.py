@@ -1,5 +1,4 @@
 import os
-import time
 from pathlib import Path
 
 import cv2
@@ -57,10 +56,7 @@ class BlipBM25Model(VideoRetrievalModel):
             with torch.no_grad():
                 for frame, img, pil_image in tqdm.tqdm(load_video_into_images(vid_path, self.image_size, self.device, subsample_rate)):
 
-                    start_time = time.time()
                     caption = self.model.generate(img, sample=False, num_beams=3, max_length=20, min_length=5)
-                    # print(f'inference time {time.time() - start_time:.3f} s')
-                    #display(pil_image.resize((image_size, image_size)))
                     document.add_caption(frame=frame, caption=Caption(caption[0]))
 
             print(document)
