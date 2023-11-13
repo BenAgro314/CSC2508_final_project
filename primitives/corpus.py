@@ -1,6 +1,6 @@
 import os
 
-from types.document import Document
+from primitives.document import Document
 
 class Corpus:
 

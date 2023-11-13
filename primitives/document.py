@@ -1,7 +1,7 @@
 import json
 import os
 
-from types.caption import Caption
+from primitives.caption import Caption
 
 class Document:
     def __init__(self, name: str, video_path: str, fps: int, frames: list[int] = None, captions: list[Caption] = None):
