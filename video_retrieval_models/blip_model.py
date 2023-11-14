@@ -12,10 +12,9 @@ from primitives.document import Document
 from rank_bm25 import BM25Okapi
 from utils.video_to_images import load_video_into_images
 
-from video_retrieval_models.common import VideoRetrievalModel
+from video_retrieval_models.common import VideoToTextProtocol, TextRetrievalProtocol, BaseVideoRetrievalModel
 
-
-class BlipBM25Model(VideoRetrievalModel):
+class BlipModel(VideoToTextProtocol):
 
     def __init__(self, device: torch.device):
         self.image_size = 384
@@ -26,9 +25,9 @@ class BlipBM25Model(VideoRetrievalModel):
         self.model = self.model.to(device)
         self.device=device
         self.process_fps = 2
-        self.corpus = None
+        self.doc_path = None
 
-    def initialize(self, video_dir_path: str) -> None:
+    def build_index(self, video_dir_path: str) -> None:
         video_path = video_dir_path
         doc_path = str(Path(video_dir_path).parent / "documents")
 
@@ -62,19 +61,32 @@ class BlipBM25Model(VideoRetrievalModel):
             print(document)
             document.save(doc_path)
 
-        self.corpus = Corpus(doc_path)
+        self.doc_path = doc_path
+
+class BM25Model(TextRetrievalProtocol):
+
+    def __init__(self):
+        self.corpus_bm25 = None
+        pass
+
+    def build_index(self, text_dir_path: str) -> None:
+        corpus = Corpus(text_dir_path)
+        self.corpus_bm25 = BM25Okapi(corpus.tokenize_documents())
 
     def retrieve(self, query: str) -> tuple[str, int]:
-        assert self.corpus is not None, "You have not called self.initialize() yet!"
+        assert self.corpus_bm25 is not None, "You have not called self.initialize() yet!"
 
         tokenized_query = query.split(" ")
-        corpus_bm25 = BM25Okapi(self.corpus.tokenize_documents())
-        doc_scores = corpus_bm25.get_scores(tokenized_query)
+        doc_scores = self.corpus_bm25.get_scores(tokenized_query)
 
         selected_doc = self.corpus[np.argmax(doc_scores)]
-
         doc_bm25 = BM25Okapi(selected_doc.tokenize_captions())
         caption_scores = doc_bm25.get_scores(tokenized_query)
         selected_caption = selected_doc[np.argmax(caption_scores)]
 
         return selected_doc.video_path, selected_caption[1]
+
+class BlipBM25Model(BaseVideoRetrievalModel):
+
+    def __init__(self, device: torch.device):
+        super().__init__(BlipModel(device), BM25Model(device))
