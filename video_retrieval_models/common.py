@@ -37,4 +37,4 @@ class BaseVideoRetrievalModel(VideoRetrievalProtocol):
         self.text_retrieval_model.build_index(self.video_to_text_model.documents_path)
 
     def retrieve(self, query: str) -> tuple[str, int]:
-        return self.text_retrieval_model(query)
+        return self.text_retrieval_model.retrieve(query)
