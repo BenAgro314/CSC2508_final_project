@@ -89,4 +89,6 @@ class BM25Model(TextRetrievalProtocol):
 class BlipBM25Model(BaseVideoRetrievalModel):
 
     def __init__(self, device: torch.device):
-        super().__init__(BlipModel(device), BM25Model())
+        video_model = BlipModel(device)
+        text_model = BM25Model()
+        super().__init__(video_model, text_model)
