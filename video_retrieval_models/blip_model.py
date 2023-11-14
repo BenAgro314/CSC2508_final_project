@@ -70,15 +70,17 @@ class BlipModel(VideoToTextProtocol):
 class BM25Model(TextRetrievalProtocol):
 
     def __init__(self):
+        self.corpus = None
         self.corpus_bm25 = None
         pass
 
     def build_index(self, text_dir_path: str) -> None:
-        corpus = Corpus(text_dir_path)
-        self.corpus_bm25 = BM25Okapi(corpus.tokenize_documents())
+        self.corpus = Corpus(text_dir_path)
+        self.corpus_bm25 = BM25Okapi(self.corpus.tokenize_documents())
 
     def retrieve(self, query: str) -> tuple[str, int]:
         assert self.corpus_bm25 is not None, "You have not called self.build_index() yet!"
+        assert self.corpus is not None, "You have not called self.build_index() yet!"
 
         tokenized_query = query.split(" ")
         doc_scores = self.corpus_bm25.get_scores(tokenized_query)
