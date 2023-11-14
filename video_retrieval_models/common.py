@@ -13,6 +13,10 @@ class VideoToTextProtocol(Protocol):
     def build_index(self, video_dir_path: str) -> None:
         ...
 
+    @property
+    def documents_path(self) -> str:
+        pass
+
 class TextRetrievalProtocol(Protocol):
 
     def build_index(self, text_dir_path: str) -> None:
@@ -30,7 +34,7 @@ class BaseVideoRetrievalModel(VideoRetrievalProtocol):
 
     def build_index(self, video_dir_path):
         self.video_to_text_model = self.video_to_text_model.build_index(video_dir_path)
-        self.text_retrieval_model = self.text_retrieval_model.build_index(video_dir_path)
+        self.text_retrieval_model = self.text_retrieval_model.build_index(self.video_to_text_model.documents_path)
 
     def retrieve(self, query: str) -> tuple[str, int]:
         return self.text_retrieval_model(query)

@@ -63,6 +63,10 @@ class BlipModel(VideoToTextProtocol):
 
         self.doc_path = doc_path
 
+    @property
+    def documents_path(self) -> str:
+        return self.doc_path
+
 class BM25Model(TextRetrievalProtocol):
 
     def __init__(self):
@@ -74,7 +78,7 @@ class BM25Model(TextRetrievalProtocol):
         self.corpus_bm25 = BM25Okapi(corpus.tokenize_documents())
 
     def retrieve(self, query: str) -> tuple[str, int]:
-        assert self.corpus_bm25 is not None, "You have not called self.initialize() yet!"
+        assert self.corpus_bm25 is not None, "You have not called self.build_index() yet!"
 
         tokenized_query = query.split(" ")
         doc_scores = self.corpus_bm25.get_scores(tokenized_query)
