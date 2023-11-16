@@ -28,7 +28,7 @@ class BlipModel(VideoToTextProtocol):
 
     def transform_pil(self, pil_image):
         transform = transforms.Compose([
-            transforms.Resize((self.img_size, self.img_size),interpolation=InterpolationMode.BICUBIC),
+            transforms.Resize((self.image_size, self.image_size),interpolation=InterpolationMode.BICUBIC),
             transforms.ToTensor(),
             transforms.Normalize((0.48145466, 0.4578275, 0.40821073), (0.26862954, 0.26130258, 0.27577711))
             ])
@@ -37,7 +37,9 @@ class BlipModel(VideoToTextProtocol):
 
     def build_index(self, video_dir_path: str) -> None:
         video_path = video_dir_path
-        doc_path = str(Path(video_dir_path).parent / "documents")
+        doc_path = str(Path(video_dir_path).parent / "blip_model_documents")
+        if not os.path.isdir(doc_path):
+            os.mkdir(doc_path)
 
         videos = {Path(v).stem: v for v in os.listdir(video_path)}
         docs = {Path(d).stem: d for d in os.listdir(doc_path)}
@@ -61,7 +63,7 @@ class BlipModel(VideoToTextProtocol):
             subsample_rate = int(round(fps / self.process_fps)) # we want to read in videos at 2 fps
 
             with torch.no_grad():
-                for frame, pil_image in tqdm.tqdm(video_to_PIL(vid_path, self.image_size, self.device, subsample_rate)):
+                for frame, pil_image in tqdm.tqdm(video_to_PIL(vid_path, subsample_rate)):
                     img = self.transform_pil(pil_image).to(self.device)
                     caption = self.model.generate(img, sample=False, num_beams=3, max_length=20, min_length=5)
                     document.add_caption(frame=frame, caption=Caption(caption[0]))

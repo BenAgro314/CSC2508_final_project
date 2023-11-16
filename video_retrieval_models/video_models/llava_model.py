@@ -68,7 +68,9 @@ class BlipModel(VideoToTextProtocol):
     def build_index(self, video_dir_path: str) -> None:
 
         video_path = video_dir_path
-        doc_path = str(Path(video_dir_path).parent / "documents")
+        doc_path = str(Path(video_dir_path).parent / "llava_documents")
+        if not os.path.isdir(doc_path):
+            os.mkdir(doc_path)
 
         videos = {Path(v).stem: v for v in os.listdir(video_path)}
         docs = {Path(d).stem: d for d in os.listdir(doc_path)}

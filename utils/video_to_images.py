@@ -13,8 +13,6 @@ def video_to_PIL(video_path, subsample_stride=1):
         print("Error: Could not open video.")
         exit()
 
-    pils = []
-
     for frame_number in range(0, total_frames, subsample_stride):
         cap.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
         ret, frame = cap.read()
@@ -24,6 +22,7 @@ def video_to_PIL(video_path, subsample_stride=1):
 
         frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         pil_image = Image.fromarray(frame_rgb)
-        pils.append(pil_image)
 
-        yield frame_number, pils
+        yield frame_number, pil_image
+
+    cap.release()
