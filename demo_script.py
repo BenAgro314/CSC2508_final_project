@@ -2,6 +2,10 @@
 
 import os
 import sys
+from video_retrieval_models.text_models.bm25_model import BM25Model
+from video_retrieval_models.common import BaseVideoRetrievalModel
+
+from video_retrieval_models.video_models.llava_model import LlavaModel
 sys.path.append("/home/bagro/CSC2508_final_project/BLIP")
 
 import torch
@@ -10,7 +14,11 @@ from video_retrieval_models.blip_bm25_model import BlipBM25Model
 
 #%% load blip model
 
-model = BlipBM25Model(device=device)
+# model = BlipBM25Model(device=device)
+model = BaseVideoRetrievalModel(
+    LlavaModel(device),
+    BM25Model()
+)
 
 
 #%% build index and query

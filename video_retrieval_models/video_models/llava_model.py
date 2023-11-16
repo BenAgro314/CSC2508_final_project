@@ -1,3 +1,4 @@
+from primitives.caption import Caption
 from transformers import AutoTokenizer, BitsAndBytesConfig
 import tqdm
 from llava.model import LlavaLlamaForCausalLM
@@ -19,7 +20,7 @@ from transformers import TextStreamer
 
 
 
-class BlipModel(VideoToTextProtocol):
+class LlavaModel(VideoToTextProtocol):
 
     def __init__(self, device: torch.device):
         model_path = "4bit/llava-v1.5-7b-5GB"
@@ -93,10 +94,15 @@ class BlipModel(VideoToTextProtocol):
             print(f"Video fps: {fps}, total frames: {total_frames}")
             subsample_rate = int(round(fps / self.process_fps))
 
-            for frame_number, pil in tqdm.tqdm(video_to_PIL(video_path, subsample_stride=subsample_rate)):
+            for frame_number, pil in tqdm.tqdm(video_to_PIL(vid_path, subsample_stride=subsample_rate)):
                 query = "Describe the image and color details."
                 output = self.caption_image(pil, query)
-        pass
+                document.add_caption(frame=frame_number, caption=Caption(output))
+
+            print(document)
+            document.save(doc_path)
+
+        self.doc_path = doc_path
 
     @property
     def documents_path(self) -> str:

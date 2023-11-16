@@ -1,4 +1,5 @@
 import cv2
+import sys
 from PIL import Image
 from torchvision import transforms
 from torchvision.transforms.functional import InterpolationMode
@@ -10,8 +11,8 @@ def video_to_PIL(video_path, subsample_stride=1):
 
 
     if not cap.isOpened():
-        print("Error: Could not open video.")
-        exit()
+        print(f"Error: Could not open video {video_path}.")
+        sys.exit()
 
     for frame_number in range(0, total_frames, subsample_stride):
         cap.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
