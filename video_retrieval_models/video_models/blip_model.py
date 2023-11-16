@@ -7,7 +7,9 @@ import tqdm
 from models.blip import blip_decoder
 from primitives.caption import Caption
 from primitives.document import Document
-from utils.video_to_images import load_video_into_images
+from utils.video_to_images import video_to_PIL
+from torchvision import transforms
+from torchvision.transforms.functional import InterpolationMode
 
 from video_retrieval_models.common import VideoToTextProtocol
 
@@ -23,6 +25,15 @@ class BlipModel(VideoToTextProtocol):
         self.device=device
         self.process_fps = 2
         self.doc_path = None
+
+    def transform_pil(self, pil_image):
+        transform = transforms.Compose([
+            transforms.Resize((self.img_size, self.img_size),interpolation=InterpolationMode.BICUBIC),
+            transforms.ToTensor(),
+            transforms.Normalize((0.48145466, 0.4578275, 0.40821073), (0.26862954, 0.26130258, 0.27577711))
+            ])
+        image = transform(pil_image).unsqueeze(0)
+        return image
 
     def build_index(self, video_dir_path: str) -> None:
         video_path = video_dir_path
@@ -50,8 +61,8 @@ class BlipModel(VideoToTextProtocol):
             subsample_rate = int(round(fps / self.process_fps)) # we want to read in videos at 2 fps
 
             with torch.no_grad():
-                for frame, img, pil_image in tqdm.tqdm(load_video_into_images(vid_path, self.image_size, self.device, subsample_rate)):
-
+                for frame, pil_image in tqdm.tqdm(video_to_PIL(vid_path, self.image_size, self.device, subsample_rate)):
+                    img = self.transform_pil(pil_image).to(self.device)
                     caption = self.model.generate(img, sample=False, num_beams=3, max_length=20, min_length=5)
                     document.add_caption(frame=frame, caption=Caption(caption[0]))
 
