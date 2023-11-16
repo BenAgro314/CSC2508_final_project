@@ -16,8 +16,8 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # model = BlipBM25Model(device=device)
 model = BaseVideoRetrievalModel(
-    # LlavaModel(device),
-    BlipModel(device),
+    LlavaModel(device),
+    # BlipModel(device),
     BM25Model()
 )
 
