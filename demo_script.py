@@ -6,7 +6,7 @@ sys.path.append("/home/bagro/CSC2508_final_project/BLIP")
 
 import torch
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-from video_retrieval_models.blip_model import BlipBM25Model
+from video_retrieval_models.blip_bm25_model import BlipBM25Model
 
 #%% load blip model
 
