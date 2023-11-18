@@ -6,4 +6,4 @@
 	url = https://github.com/BenAgro314/LLaVA.git
 [submodule "llama.cpp"]
 	path = llama.cpp
-	url = https://github.com/ggerganov/llama.cpp
+	url = https://github.com/BenAgro314/llama.cpp.git
