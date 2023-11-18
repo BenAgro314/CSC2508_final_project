@@ -3,7 +3,7 @@
 	url = https://github.com/BenAgro314/BLIP.git
 [submodule "LLaVA"]
 	path = LLaVA
-	url = https://github.com/haotian-liu/LLaVA.git
+	url = https://github.com/BenAgro314/LLaVA.git
 [submodule "llama.cpp"]
 	path = llama.cpp
 	url = https://github.com/ggerganov/llama.cpp
