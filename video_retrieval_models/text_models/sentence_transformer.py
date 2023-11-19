@@ -8,10 +8,10 @@ import torch
 # TODO: document level search (heirarchical)
 class SentenceTransformerModel(TextRetrievalProtocol):
 
-    def __init__(self, device):
+    def __init__(self, device, model_name="sentence-t5-large"):
         self.corpus = None
         self.embeddings = {}
-        self.embedder = SentenceTransformer('all-MiniLM-L6-v2').to(device)
+        self.embedder = SentenceTransformer(model_name).to(device)
 
 
     def build_index(self, text_dir_path: str) -> None:
