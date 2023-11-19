@@ -8,7 +8,7 @@ import torch
 # TODO: document level search (heirarchical)
 class SentenceTransformerModel(TextRetrievalProtocol):
 
-    def __init__(self, device, model_name="sentence-t5-large"):
+    def __init__(self, device, model_name="all-MiniLM-L6-v2"):
         self.corpus = None
         self.embeddings = {}
         self.embedder = SentenceTransformer(model_name).to(device)
@@ -20,7 +20,7 @@ class SentenceTransformerModel(TextRetrievalProtocol):
         max_seq_length = self.embedder.max_seq_length
         for doc in self.corpus:
             sentence_list = [str(c) for c in doc.captions]
-            doc_embeddings = self.embedder.encode(sentence_list, convert_to_tensor=True, max_length=max_seq_length)
+            doc_embeddings = self.embedder.encode(sentence_list, convert_to_tensor=True) #, max_length=max_seq_length)
             self.embeddings[doc] = doc_embeddings
 
     def retrieve(self, query: str) -> tuple[str, int]:
@@ -37,6 +37,7 @@ class SentenceTransformerModel(TextRetrievalProtocol):
             doc_similarities.append(torch.max(cos_scores))
             similarities[doc] = cos_scores
 
+        print(similarities)
         selected_doc = docs[torch.argmax(torch.stack(doc_similarities, dim=0)).item()]
         best_frame = torch.argmax(similarities[selected_doc]).item()
         selected_caption = selected_doc[best_frame]
@@ -46,5 +47,5 @@ class SentenceTransformerModel(TextRetrievalProtocol):
 
 if __name__ == "__main__":
     m = SentenceTransformerModel("cuda")
-    m.build_index("/home/bagro/documents/")
-    print(m.retrieve("a"))
+    m.build_index("/home/bagro/llava_documents/")
+    print(m.retrieve("tiger"))
