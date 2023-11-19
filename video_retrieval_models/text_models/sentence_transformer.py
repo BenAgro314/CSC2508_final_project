@@ -37,7 +37,6 @@ class SentenceTransformerModel(TextRetrievalProtocol):
             doc_similarities.append(torch.max(cos_scores))
             similarities[doc] = cos_scores
 
-        print(similarities)
         selected_doc = docs[torch.argmax(torch.stack(doc_similarities, dim=0)).item()]
         best_frame = torch.argmax(similarities[selected_doc]).item()
         selected_caption = selected_doc[best_frame]
