@@ -1,5 +1,7 @@
 from typing import Protocol
 
+from primitives.document import Document
+
 class VideoRetrievalProtocol(Protocol):
 
     def build_index(self, video_dir_path: str) -> None:
@@ -22,7 +24,7 @@ class TextRetrievalProtocol(Protocol):
     def build_index(self, text_dir_path: str) -> None:
         ...
 
-    def retrieve(self, query: str) -> tuple[str, int]:
+    def retrieve(self, query: str, topk: int = 1) -> list[tuple[Document, int]]:
         ...
 
 
@@ -36,5 +38,5 @@ class BaseVideoRetrievalModel(VideoRetrievalProtocol):
         self.video_to_text_model.build_index(video_dir_path)
         self.text_retrieval_model.build_index(self.video_to_text_model.documents_path)
 
-    def retrieve(self, query: str) -> tuple[str, int]:
-        return self.text_retrieval_model.retrieve(query)
+    def retrieve(self, query: str, topk: int = 1) -> list[tuple[Document, int]]:
+        return self.text_retrieval_model.retrieve(query, topk=topk)

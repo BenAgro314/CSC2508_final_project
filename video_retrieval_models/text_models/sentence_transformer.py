@@ -23,28 +23,24 @@ class SentenceTransformerModel(TextRetrievalProtocol):
             doc_embeddings = self.embedder.encode(sentence_list, convert_to_tensor=True) #, max_length=max_seq_length)
             self.embeddings[doc] = doc_embeddings
 
-    def retrieve(self, query: str) -> tuple[str, int]:
+    def retrieve(self, query: str, topk: int = 1) -> list[tuple[Document, int]]:
         query_embedding = self.embedder.encode(query, convert_to_tensor=True)
 
-        # find best matching sentence (super naive)
-        doc_similarities = []
-        docs = [doc for doc in self.embeddings]
-        similarities = {}
+        similarities = []
 
-        for doc in docs:
+        for doc in self.embeddings:
             cos_scores = util.cos_sim(query_embedding, self.embeddings[doc])[0]
             # top_results = torch.topk(cos_scores, k=1)
-            doc_similarities.append(torch.max(cos_scores))
-            similarities[doc] = cos_scores
+            # doc_similarities.append(torch.max(cos_scores))
+            similarities += [(cos_scores[i].item(), doc, i) for i in range(len(doc))]
 
-        selected_doc = docs[torch.argmax(torch.stack(doc_similarities, dim=0)).item()]
-        best_frame = torch.argmax(similarities[selected_doc]).item()
-        selected_caption = selected_doc[best_frame]
+        similarities = sorted(similarities, key = lambda x: x[0], reverse=True)
+        similarities[:topk]
 
-        return selected_doc.video_path, selected_caption[1]
+        return [(t[1], t[2]) for t in similarities[:topk]]
 
 
 if __name__ == "__main__":
     m = SentenceTransformerModel("cuda")
     m.build_index("/home/bagro/llava_documents/")
-    print(m.retrieve("tiger"))
+    print(m.retrieve("tiger", topk=3))
