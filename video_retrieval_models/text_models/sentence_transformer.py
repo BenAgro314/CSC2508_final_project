@@ -19,6 +19,8 @@ class SentenceTransformerModel(TextRetrievalProtocol):
         sentence_list = []
         for doc in self.corpus:
             sentence_list = [str(c) for c in doc.captions]
+            for c in doc.captions:
+                print(c, len(c))
             doc_embeddings = self.embedder.encode(sentence_list, convert_to_tensor=True)
             self.embeddings[doc] = doc_embeddings
 
