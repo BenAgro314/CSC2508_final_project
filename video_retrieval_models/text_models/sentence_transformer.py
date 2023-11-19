@@ -33,7 +33,7 @@ class SentenceTransformerModel(TextRetrievalProtocol):
         for doc in docs:
             cos_scores = util.cos_sim(query_embedding, self.embeddings[doc])[0]
             # top_results = torch.topk(cos_scores, k=1)
-            doc_similarities.append(torch.mean(cos_scores))
+            doc_similarities.append(torch.max(cos_scores))
             similarities[doc] = cos_scores
 
         selected_doc = docs[torch.argmax(torch.stack(doc_similarities, dim=0)).item()]
