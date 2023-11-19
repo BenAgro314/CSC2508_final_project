@@ -17,9 +17,10 @@ class SentenceTransformerModel(TextRetrievalProtocol):
     def build_index(self, text_dir_path: str) -> None:
         self.corpus = Corpus(text_dir_path)
         sentence_list = []
+        max_seq_length = self.embedder.max_seq_length
         for doc in self.corpus:
             sentence_list = [str(c) for c in doc.captions]
-            doc_embeddings = self.embedder.encode(sentence_list, convert_to_tensor=True, max_length=512)
+            doc_embeddings = self.embedder.encode(sentence_list, convert_to_tensor=True, max_length=max_seq_length)
             self.embeddings[doc] = doc_embeddings
 
     def retrieve(self, query: str) -> tuple[str, int]:
