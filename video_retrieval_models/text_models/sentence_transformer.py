@@ -27,7 +27,6 @@ class SentenceTransformerModel(TextRetrievalProtocol):
             data = json.load(f)
             self.doc_to_embedding_index = data["doc_to_embedding_index"]
             self.model_name = data["model_name"]
-            self.device = data["device"]
 
     def save_checkpoint(self, faiss_path: str, json_path: str):
         faiss.write_index(self.index, faiss_path)
@@ -35,7 +34,6 @@ class SentenceTransformerModel(TextRetrievalProtocol):
             data = {
                 "doc_to_embedding_index": self.doc_to_embedding_index,
                 "model_name": self.model_name,
-                "device": str(self.device)
             }
             json.dump(data, f, indent=4)
 
