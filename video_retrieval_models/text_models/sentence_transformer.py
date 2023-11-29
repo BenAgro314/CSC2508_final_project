@@ -8,7 +8,6 @@ from sentence_transformers import SentenceTransformer, util
 import torch
 import faiss
 
-# TODO: caching and vector DB
 # TODO: document level search (heirarchical)
 class SentenceTransformerModel(TextRetrievalProtocol):
 
