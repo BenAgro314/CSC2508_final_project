@@ -7,3 +7,6 @@
 [submodule "llama.cpp"]
 	path = llama.cpp
 	url = https://github.com/BenAgro314/llama.cpp.git
+[submodule "whisper.cpp"]
+	path = whisper.cpp
+	url = https://github.com/BenAgro314/whisper.cpp.git
