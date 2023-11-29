@@ -35,7 +35,7 @@ class SentenceTransformerModel(TextRetrievalProtocol):
             data = {
                 "doc_to_embedding_index": self.doc_to_embedding_index,
                 "model_name": self.model_name,
-                "device": self.device
+                "device": str(self.device)
             }
             json.dump(data, f, indent=4)
 
