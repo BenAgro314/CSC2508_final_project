@@ -6,11 +6,14 @@ class Corpus:
 
     def __init__(self, docs_path: str = None):
         self.documents = []
+        self.name_to_doc = {}
         if docs_path is not None:
             doc_names = os.listdir(docs_path)
             for n in doc_names:
                 doc = Document.read(os.path.join(docs_path, n))
                 self.documents.append(doc)
+                assert doc.name not in self.name_to_doc, "Document names must be unique!"
+                self.name_to_doc[doc.name] = doc
 
     def add_document(self, doc: Document):
         self.documents.append(doc)
