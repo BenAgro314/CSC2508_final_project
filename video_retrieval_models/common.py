@@ -10,6 +10,11 @@ class VideoRetrievalProtocol(Protocol):
     def retrieve(self, query: str) -> tuple[str, int]:
         ...
 
+class AudioToTextProtocol(Protocol):
+
+    def build_index(self, audio_dir_path: str) -> None:
+        ...
+
 class VideoToTextProtocol(Protocol):
 
     def build_index(self, video_dir_path: str) -> None:
