@@ -30,3 +30,6 @@ class Corpus:
 
     def __str__(self):
         return f"Documents: {[d.name for d in self.documents]}"
+
+    def __contains__(self, item) -> bool:
+        return item in self.name_to_doc

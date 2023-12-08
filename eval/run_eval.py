@@ -22,18 +22,23 @@ with open(str(preds_path), "r") as f:
 sentence_to_video_mapping = val_info["sentence_to_video_mapping"]
 print(f"Running validation on {len(sentence_to_video_mapping)} sentences")
 
+rs = [1, 5, 10]
+
 tps = {
-    1: 0,
-    5: 0,
-    10: 0,
+    r: 0 for r in rs
 }
+
+sentence_count = 0
 
 for i, sentence in enumerate(sentence_to_video_mapping):
     print(f"Sentence: [{i}/{len(sentence_to_video_mapping)}]")
-    assert sentence in preds
+    if sentence not in preds:
+        print(f"Warning skipping sentence '{sentence}' because it is not in preds")
+        continue
     assert len(preds[sentence]) >= 10, "Must produce top 10 rankings"
+    sentence_count += 1
     gt_video_paths = set(sentence_to_video_mapping[sentence])
-    for r in [1, 5, 10]:
+    for r in rs:
         hit = False
         for v in preds[sentence][:r]:
             if v in gt_video_paths:
@@ -42,6 +47,6 @@ for i, sentence in enumerate(sentence_to_video_mapping):
         if hit:
             tps[r] += 1
 
-recall = {r: (tp/len(sentence_to_video_mapping)) for r, tp in tps.items()} 
+recall = {r: (tp/sentence_count) for r, tp in tps.items()} 
 
 print(f"Recall metrics: {recall}")

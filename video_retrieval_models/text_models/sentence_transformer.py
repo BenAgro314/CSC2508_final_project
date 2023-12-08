@@ -7,6 +7,7 @@ from video_retrieval_models.common import TextRetrievalProtocol
 from sentence_transformers import SentenceTransformer, util
 import torch
 import faiss
+from ordered_set import OrderedSet
 
 # TODO: document level search (heirarchical)
 class SentenceTransformerModel(TextRetrievalProtocol):
@@ -60,6 +61,7 @@ class SentenceTransformerModel(TextRetrievalProtocol):
         for doc in self.corpus:
             if doc.name in self.doc_to_embedding_index:
                 continue
+            print(f"Indexing doc: {doc.name}")
             sentence_list = [str(c) for c in doc.captions]
             doc_embeddings = self.embedder.encode(sentence_list, convert_to_tensor=True)
             self.doc_to_embedding_index[doc.name] = (running_index, running_index + doc_embeddings.shape[0])
@@ -93,6 +95,29 @@ class SentenceTransformerModel(TextRetrievalProtocol):
                     
         return similarities
 
+    def retrieve_unique(self, query: str, topk: int = 10) -> list:
+        query_embedding = self.embedder.encode(query, convert_to_tensor=True)
+        xq = query_embedding.cpu().numpy().reshape(1, -1)
+        faiss.normalize_L2(xq)
+
+        # best_docs = set()
+        best_docs = OrderedSet([])
+        search_topk = int(2 * topk)
+
+        while len(best_docs) < topk:
+            _, indices = self.index.search(xq, search_topk)
+            indices = indices[0] # we only do one query at a time (currently)
+
+            for ind in indices:
+                for doc_name in self.doc_to_embedding_index:
+                    if ind >= self.doc_to_embedding_index[doc_name][0] and ind < self.doc_to_embedding_index[doc_name][1]:
+                        best_docs.add(doc_name)
+                    
+            search_topk += int(2 * topk)
+
+        out = list(best_docs[:topk])
+        assert len(out) == topk
+        return out
 
 if __name__ == "__main__":
     m = SentenceTransformerModel("cuda")

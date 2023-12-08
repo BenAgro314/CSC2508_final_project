@@ -2,3 +2,4 @@ sentence-transformers
 rank_bm25
 faiss-gpu
 faiss-cpu
+ordered-set
