@@ -4,7 +4,7 @@ import os
 import sys
 
 # 1. Load Labels
-msr_path = Path("/home/bagro/MSR-VTT") 
+msr_path = Path("/home/ubuntu/csc2508/MSR-VTT") 
 with open(str(Path(msr_path / "train_val_annotation/val_info.json")), "r") as f:
     val_info = json.load(f)
 

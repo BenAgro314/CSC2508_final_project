@@ -1,9 +1,11 @@
-from video_retrieval_models.text_models.sentence_transformer import SentenceTransformerModel
+from video_retrieval_models.text_models.doc_level_angle_embeddings_no_pool import DocLevelAngleEmbeddingsNoPool
 from pathlib import Path
 import json
 
 device = "cuda"
-text_model = SentenceTransformerModel(device)
+# Best so far:
+text_model = DocLevelAngleEmbeddingsNoPool(device, pool="mean") 
+
 doc_dir = "/home/ubuntu/csc2508/MSR-VTT/llava_docs_13b/"
 text_model.build_index(doc_dir)
 
@@ -17,7 +19,7 @@ sentence_to_video_mapping = val_info["sentence_to_video_mapping"]
 
 preds = {}
 
-topk = 10
+topk = 100
 for i, video in enumerate(video_to_sentence_mapping):
     # print(f"Processing video [{i}/{len(text_model.corpus)}]")
     if video not in text_model.corpus:
@@ -30,7 +32,7 @@ for i, video in enumerate(video_to_sentence_mapping):
             continue
         print(f"Trying to retrieve sentence: {sentence}")
         # docs = text_model.retrieve(sentence, topk=topk)
-        docs = text_model.retrieve_unique(sentence, topk=topk)
+        docs = text_model.retrieve(sentence, topk=topk)
         preds[sentence] += docs
         print(docs)
         # for 
@@ -38,8 +40,9 @@ for i, video in enumerate(video_to_sentence_mapping):
              # print(doc_name)
             # preds[sentence].append(doc_name)
 
-preds_path = Path("/home/ubuntu/csc2508/MSR-VTT/llava_preds.json") 
+preds_path = Path("/home/ubuntu/csc2508/MSR-VTT/doc_level_angle_preds_no_pool.json") 
 with open(str(preds_path), "w") as f:
     json.dump(preds, f)
 
 print(f"Saved preds to {preds_path}")
+

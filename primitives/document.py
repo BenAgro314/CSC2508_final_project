@@ -1,10 +1,11 @@
 import json
 import os
+from typing import List
 
 from primitives.caption import Caption
 
 class Document:
-    def __init__(self, name: str, video_path: str, fps: int, frames: list[int] = None, captions: list[Caption] = None):
+    def __init__(self, name: str, video_path: str, fps: int, frames: List[int] = None, captions: List[Caption] = None):
         self.name = name
         self.video_path = video_path
         self.fps = fps
@@ -70,7 +71,7 @@ class Document:
         return ret
 
 
-    def tokenize_captions(self) -> list[str]:
+    def tokenize_captions(self) -> List[str]:
         return [c.tokenize() for c in self.captions]
 
     def __getitem__(self, id):

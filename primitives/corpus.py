@@ -1,4 +1,5 @@
 import os
+from typing import List
 
 from primitives.document import Document
 
@@ -18,7 +19,7 @@ class Corpus:
     def add_document(self, doc: Document):
         self.documents.append(doc)
 
-    def tokenize_documents(self) -> list[str]:
+    def tokenize_documents(self) -> List[str]:
         """Tokenize documents"""
         return [d.tokenize() for d in self.documents]
 

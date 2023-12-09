@@ -6,11 +6,11 @@ device = "cuda"
 # Best so far:
 text_model = DocLevelAngleEmbeddings(device, pool="mean") 
 
-doc_dir = "/home/bagro/MSR-VTT/llava_documents/"
+doc_dir = "/home/ubuntu/csc2508/MSR-VTT/llava_docs_7b/"
 text_model.build_index(doc_dir)
 
 # 1. Load Queries
-msr_path = Path("/home/bagro/MSR-VTT") 
+msr_path = Path("/home/ubuntu/csc2508/MSR-VTT") 
 with open(str(Path(msr_path / "train_val_annotation/val_info.json")), "r") as f:
     val_info = json.load(f)
 
@@ -40,7 +40,7 @@ for i, video in enumerate(video_to_sentence_mapping):
              # print(doc_name)
             # preds[sentence].append(doc_name)
 
-preds_path = Path("/home/bagro/MSR-VTT/doc_level_angle_preds.json") 
+preds_path = Path("/home/ubuntu/csc2508/MSR-VTT/doc_level_angle_preds_7b.json") 
 with open(str(preds_path), "w") as f:
     json.dump(preds, f)
 

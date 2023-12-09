@@ -1,16 +1,16 @@
 from primitives.corpus import Corpus
+from typing import List, Tuple
 import json
 import os
 from pathlib import Path
 from primitives.document import Document
-from video_retrieval_models.common import TextRetrievalProtocol 
 from sentence_transformers import SentenceTransformer, util
 import torch
 import faiss
 from ordered_set import OrderedSet
 
 # TODO: document level search (heirarchical)
-class SentenceTransformerModel(TextRetrievalProtocol):
+class SentenceTransformerModel:
 
     def __init__(self, device, model_name="all-MiniLM-L6-v2"):
         self.corpus = None
@@ -78,7 +78,7 @@ class SentenceTransformerModel(TextRetrievalProtocol):
         assert self.index is not None
 
 
-    def retrieve(self, query: str, topk: int = 1) -> list[tuple[Document, int]]:
+    def retrieve(self, query: str, topk: int = 1) -> List[Tuple[Document, int]]:
         query_embedding = self.embedder.encode(query, convert_to_tensor=True)
 
         xq = query_embedding.cpu().numpy().reshape(1, -1)
@@ -95,7 +95,7 @@ class SentenceTransformerModel(TextRetrievalProtocol):
                     
         return similarities
 
-    def retrieve_unique(self, query: str, topk: int = 10) -> list:
+    def retrieve_unique(self, query: str, topk: int = 10) -> List:
         query_embedding = self.embedder.encode(query, convert_to_tensor=True)
         xq = query_embedding.cpu().numpy().reshape(1, -1)
         faiss.normalize_L2(xq)

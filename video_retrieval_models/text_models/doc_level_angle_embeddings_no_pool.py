@@ -9,7 +9,7 @@ from ordered_set import OrderedSet
 from angle_emb import AnglE, Prompts
 
 # TODO: document level search (heirarchical)
-class DocLevelAngleEmbeddings:
+class DocLevelAngleEmbeddingsNoPool:
 
     def __init__(self, device, model_name=None, pool="mean"):
         self.corpus = None
@@ -54,10 +54,10 @@ class DocLevelAngleEmbeddings:
         self.index_to_doc = {}
 
         # self.embedder = (self.model_name).to(self.device)
-        self.angle = AnglE.from_pretrained('WhereIsAI/UAE-Large-V1', pooling_strategy='cls').cuda()
-        self.angle.set_prompt(prompt=Prompts.C)
-        # self.angle = AnglE.from_pretrained('NousResearch/Llama-2-7b-hf', pretrained_lora_path='SeanLee97/angle-llama-7b-nli-v2')
-        # self.angle.set_prompt(prompt=Prompts.A)
+        # self.angle = AnglE.from_pretrained('WhereIsAI/UAE-Large-V1', pooling_strategy='cls').cuda()
+        # self.angle.set_prompt(prompt=Prompts.C)
+        self.angle = AnglE.from_pretrained('NousResearch/Llama-2-7b-hf', pretrained_lora_path='SeanLee97/angle-llama-7b-nli-v2')
+        self.angle.set_prompt(prompt=Prompts.A)
 
         self.corpus = Corpus(text_dir_path)
         sentence_list = []
@@ -66,17 +66,15 @@ class DocLevelAngleEmbeddings:
         for doc in self.corpus:
 
             print(f"Indexing doc: {doc.name}")
-            sentence_list = [{'text': str(c)} for c in doc.captions]
-            doc_embeddings = self.angle.encode(sentence_list, to_numpy=False)
-            if self.pool == "mean":
-                agg_doc_embedding = doc_embeddings.mean(dim=0).reshape(1, -1)
-            elif self.pool == "max":
-                agg_doc_embedding = doc_embeddings.max(dim=0)[0].reshape(1, -1)
-
+            text = "A video with the following images:\n"
+            for i, c in enumerate(doc.captions):
+                text += str(c)
+                if i != len(doc.captions) - 1:
+                    text += "\n"
+            sentence_list = [{'text': text}]
+            agg_doc_embedding = self.angle.encode(sentence_list, to_numpy=False)
             self.index_to_doc[running_index] = doc
-
             running_index += 1
-
             all_embeddings.append(
                 torch.nn.functional.normalize(agg_doc_embedding, dim=-1)
             )
