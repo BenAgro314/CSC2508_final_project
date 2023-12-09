@@ -22,7 +22,7 @@ with open(str(preds_path), "r") as f:
 sentence_to_video_mapping = val_info["sentence_to_video_mapping"]
 print(f"Running validation on {len(sentence_to_video_mapping)} sentences")
 
-rs = [1, 5, 10]
+rs = [1, 5, 10, 20, 30, 50, 100]
 
 tps = {
     r: 0 for r in rs
@@ -46,6 +46,9 @@ for i, sentence in enumerate(sentence_to_video_mapping):
                 break
         if hit:
             tps[r] += 1
+        else:
+            print("Failure case:")
+            print(sentence, preds[sentence][:r])
 
 recall = {r: (tp/sentence_count) for r, tp in tps.items()} 
 

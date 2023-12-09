@@ -1,12 +1,11 @@
-from video_retrieval_models.text_models.doc_level_sentence_transformer import DocLevelSentenceTransformerModel
+from video_retrieval_models.text_models.doc_level_angle_embeddings import DocLevelAngleEmbeddings
 from pathlib import Path
 import json
 
 device = "cuda"
 # Best so far:
-text_model = DocLevelSentenceTransformerModel(device, model_name="all-mpnet-base-v2", pool="mean") #, use_l2=True, use_cosine=False)
+text_model = DocLevelAngleEmbeddings(device, pool="mean") 
 
-# text_model = DocLevelSentenceTransformerModel(device, model_name="multi-qa-distilbert-cos-v1", pool="max") #, use_l2=True, use_cosine=False)
 doc_dir = "/home/bagro/MSR-VTT/llava_documents/"
 text_model.build_index(doc_dir)
 
@@ -20,7 +19,7 @@ sentence_to_video_mapping = val_info["sentence_to_video_mapping"]
 
 preds = {}
 
-topk = 20
+topk = 100
 for i, video in enumerate(video_to_sentence_mapping):
     # print(f"Processing video [{i}/{len(text_model.corpus)}]")
     if video not in text_model.corpus:
@@ -41,7 +40,7 @@ for i, video in enumerate(video_to_sentence_mapping):
              # print(doc_name)
             # preds[sentence].append(doc_name)
 
-preds_path = Path("/home/bagro/MSR-VTT/doc_level_llava_preds.json") 
+preds_path = Path("/home/bagro/MSR-VTT/doc_level_angle_preds.json") 
 with open(str(preds_path), "w") as f:
     json.dump(preds, f)
 

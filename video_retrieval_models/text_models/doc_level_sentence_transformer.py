@@ -3,7 +3,7 @@ import json
 import os
 from pathlib import Path
 from primitives.document import Document
-from sentence_transformers import SentenceTransformer, util
+from sentence_transformers import SentenceTransformer, util, CrossEncoder
 import torch
 import faiss
 from ordered_set import OrderedSet
@@ -61,6 +61,7 @@ class DocLevelSentenceTransformerModel:
             self.index_to_doc = {}
 
         self.embedder = SentenceTransformer(self.model_name).to(self.device)
+        self.cross_encoder = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2', device=self.device)
 
         self.corpus = Corpus(text_dir_path)
         sentence_list = []
@@ -106,6 +107,24 @@ class DocLevelSentenceTransformerModel:
             docs.append(self.index_to_doc[str(ind)])
 
         return docs
+
+        # # re-ranking
+        # to_sort = []
+        # for ind in indices:
+        #     doc_name = self.index_to_doc[str(ind)]
+        #     doc = self.corpus.name_to_doc[doc_name]
+
+        #     scores = self.cross_encoder.predict(
+        #         [[str(c), query] for c in doc.captions],
+        #         convert_to_tensor=True,
+        #     )
+        #     max_score = scores.max()
+        #     to_sort.append((max_score, doc.name))
+        #     #docs.append(self.index_to_doc[str(ind)])
+
+        # res = sorted(to_sort, key=lambda x: -x[0])
+
+        # return [t[1] for t in res]
 
 
 if __name__ == "__main__":
