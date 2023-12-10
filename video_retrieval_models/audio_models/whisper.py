@@ -1,12 +1,12 @@
 import os
+from typing import List, Tuple
 import json
 from pathlib import Path
 import subprocess
 
-from video_retrieval_models.common import AudioToTextProtocol
 
 
-class Whisper(AudioToTextProtocol):
+class Whisper:
 
     def __init__(self):
         whisper_dir = Path(__file__).parent.parent.parent / "whisper.cpp"
