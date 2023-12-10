@@ -20,7 +20,8 @@ clip_ctx = llava_cpp.clip_model_load(
 #%%
 
 def get_llava_image_embedding(clip_ctx, llm, image_path):
-    system_prompt = "Represent this data for searching relevant images:" 
+    # system_prompt = "You a perfect image captioning system. Caption the following image in detail:" 
+    system_prompt = "USER: Describe the following image in detail:" 
     llm.eval(llm.tokenize(system_prompt.encode("utf8"), add_bos=True))
     with open(image_path, "rb") as f:
         image_bytes = f.read()
@@ -51,7 +52,8 @@ def get_llava_image_embedding(clip_ctx, llm, image_path):
     return torch.tensor(llama_get_embeddings(llm._ctx.ctx)[:llm.n_embd()]).to("cuda")
 
 def get_llava_text_embedding(llm, text):
-    llm.eval(llm.tokenize(f"Represent this data for searching relevant images: {text}.".encode("utf8"), add_bos=False))
+    system_prompt = "A chat between a human and an artifical intellegence assistant. The assistant gives helpful and detailed answers to the humans questions. USER: Describe the following text in detail:" 
+    llm.eval(llm.tokenize(f"{system_prompt} {text}.".encode("utf8"), add_bos=False))
     embed = torch.tensor(llama_get_embeddings(llm._ctx.ctx)[:llm.n_embd()]).to("cuda")
     return embed
 
@@ -63,10 +65,10 @@ llava.reset()
 img_embedding = get_llava_image_embedding(clip_ctx, llava, image_path)
 
 llava.reset()
-pos_embed = get_llava_text_embedding(llava, "A documentary about Borneo")
+pos_embed = get_llava_text_embedding(llava, "An orangutan sitting a tree")
 
 llava.reset()
-neg_embed = get_llava_text_embedding(llava, "A documentary about Toronto")
+neg_embed = get_llava_text_embedding(llava, "An orangutan hanging on a branch")
 
 cosine_sim = torch.nn.CosineSimilarity(dim=0)
 print(f"Cosine:")
