@@ -1,5 +1,4 @@
 from llama_cpp import Llama, llama_get_embeddings
-from llama_cpp.llama_chat_format import Llava15ChatHandler
 import time
 import numpy as np
 import torch
@@ -86,6 +85,15 @@ def read_video_frames(video_path, desired_fps):
 
     cap.release()
 
+def make_model():
+    clip_model_path = "/home/ubuntu/csc2508/models/llava-13b/mmproj-model-f16.gguf" 
+    llava_model_path = "/home/ubuntu/csc2508/models/llava-13b/ggml-model-q5_k.gguf"
+    llava = Llama(model_path=llava_model_path, n_ctx=2048, n_gpu_layers=-1, logits_all=True, embedding=True)
+    clip_ctx = llava_cpp.clip_model_load(
+        clip_model_path.encode(), 0
+    )
+
+    return clip_ctx, llava
 
 if __name__ == "__main__":
 
@@ -105,12 +113,7 @@ if __name__ == "__main__":
     print(f"Processing {len(remaining_video_names)} videos")
     print(f"Skipping {len(existing_embedding_names)} videos because they already have embeddings")
 
-    clip_model_path = "/home/ubuntu/csc2508/models/llava-13b/mmproj-model-f16.gguf" 
-    llava_model_path = "/home/ubuntu/csc2508/models/llava-13b/ggml-model-q5_k.gguf"
-    llava = Llama(model_path=llava_model_path, n_ctx=2048, n_gpu_layers=-1, logits_all=True, embedding=True)
-    clip_ctx = llava_cpp.clip_model_load(
-        clip_model_path.encode(), 0
-    )
+    clip_ctx, llava = make_model()
 
     for j, video_name in enumerate(remaining_video_names):
         print(f"[{j}/{len(remaining_video_names)}]")
