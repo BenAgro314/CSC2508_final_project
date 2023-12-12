@@ -92,7 +92,7 @@ class DocLevelSentenceTransformerModel:
         self.save_checkpoint(str(faiss_path), str(json_path))
         assert self.index is not None
 
-    def retrieve(self, query: str, topk: int = 1) -> list[str]:
+    def retrieve(self, query: str, topk: int = 1):
         query_embedding = self.embedder.encode(query, convert_to_tensor=True)
 
         xq = query_embedding.cpu().numpy().reshape(1, -1)

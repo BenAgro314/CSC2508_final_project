@@ -4,14 +4,14 @@ import json
 
 device = "cuda"
 # Best so far:
-text_model = DocLevelSentenceTransformerModel(device, model_name="all-mpnet-base-v2", pool="mean") #, use_l2=True, use_cosine=False)
+text_model = DocLevelSentenceTransformerModel(device, model_name="all-mpnet-base-v2", pool="max") #, use_l2=True, use_cosine=False)
 
 # text_model = DocLevelSentenceTransformerModel(device, model_name="multi-qa-distilbert-cos-v1", pool="max") #, use_l2=True, use_cosine=False)
-doc_dir = "/home/bagro/MSR-VTT/llava_documents/"
+doc_dir = "/home/ubuntu/csc2508/MSR-VTT/llava_docs_13b/"
 text_model.build_index(doc_dir)
 
 # 1. Load Queries
-msr_path = Path("/home/bagro/MSR-VTT") 
+msr_path = Path("/home/ubuntu/csc2508/MSR-VTT/") 
 with open(str(Path(msr_path / "train_val_annotation/val_info.json")), "r") as f:
     val_info = json.load(f)
 
@@ -41,7 +41,7 @@ for i, video in enumerate(video_to_sentence_mapping):
              # print(doc_name)
             # preds[sentence].append(doc_name)
 
-preds_path = Path("/home/bagro/MSR-VTT/doc_level_llava_preds.json") 
+preds_path = Path("/home/ubuntu/csc2508/MSR-VTT/13b_st_max.json") 
 with open(str(preds_path), "w") as f:
     json.dump(preds, f)
 

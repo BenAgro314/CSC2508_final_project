@@ -54,10 +54,10 @@ class DocLevelAngleEmbeddingsNoPool:
         self.index_to_doc = {}
 
         # self.embedder = (self.model_name).to(self.device)
-        # self.angle = AnglE.from_pretrained('WhereIsAI/UAE-Large-V1', pooling_strategy='cls').cuda()
-        # self.angle.set_prompt(prompt=Prompts.C)
-        self.angle = AnglE.from_pretrained('NousResearch/Llama-2-7b-hf', pretrained_lora_path='SeanLee97/angle-llama-7b-nli-v2')
-        self.angle.set_prompt(prompt=Prompts.A)
+        self.angle = AnglE.from_pretrained('WhereIsAI/UAE-Large-V1', pooling_strategy='cls').cuda()
+        self.angle.set_prompt(prompt=Prompts.C)
+        # self.angle = AnglE.from_pretrained('NousResearch/Llama-2-7b-hf', pretrained_lora_path='SeanLee97/angle-llama-7b-nli-v2')
+        # self.angle.set_prompt(prompt=Prompts.A)
 
         self.corpus = Corpus(text_dir_path)
         sentence_list = []
