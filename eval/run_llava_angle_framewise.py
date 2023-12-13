@@ -4,10 +4,8 @@ from pathlib import Path
 import json
 
 device = "cuda"
-# Best so far:
-text_model = AngleEmbeddings(device)
-
-# text_model = DocLevelSentenceTransformerModel(device, model_name="multi-qa-distilbert-cos-v1", pool="max") #, use_l2=True, use_cosine=False)
+pool = "mean"
+text_model = AngleEmbeddings(device, pool=pool)
 doc_dir = "/home/ubuntu/csc2508/MSR-VTT/llava_docs_13b/"
 text_model.build_index(doc_dir)
 
@@ -21,7 +19,7 @@ sentence_to_video_mapping = val_info["sentence_to_video_mapping"]
 
 preds = {}
 
-topk = 20
+topk = 10
 for i, video in enumerate(video_to_sentence_mapping):
     # print(f"Processing video [{i}/{len(text_model.corpus)}]")
     if video not in text_model.corpus:
@@ -34,7 +32,7 @@ for i, video in enumerate(video_to_sentence_mapping):
             continue
         print(f"Trying to retrieve sentence: {sentence}")
         # docs = text_model.retrieve(sentence, topk=topk)
-        docs = text_model.retrieve_unique(sentence, topk=topk)
+        docs = text_model.retrieve(sentence, topk=topk)
         preds[sentence] += docs
         print(docs)
         # for 
@@ -42,7 +40,7 @@ for i, video in enumerate(video_to_sentence_mapping):
              # print(doc_name)
             # preds[sentence].append(doc_name)
 
-preds_path = Path("/home/ubuntu/csc2508/MSR-VTT/13b_angle_framewise.json") 
+preds_path = Path(f"/home/ubuntu/csc2508/MSR-VTT/13b_angle_framewise_{pool}.json") 
 with open(str(preds_path), "w") as f:
     json.dump(preds, f)
 
