@@ -43,7 +43,15 @@ class AngleEmbeddings:
         for doc in self.corpus:
 
             print(f"Indexing doc: {doc.name}")
-            sentence_list = [{'text': str(c)} for c in doc.captions]
+            # sentence_list = [{'text': str(c)} for c in doc.captions]
+
+
+            sentence_list = [{'text': str(doc.captions[i-1]) + str(doc.captions[i]) + str(doc.captions[i + 1])} for i in range(1,len(doc.captions)-2)]
+
+            # text = ""
+            # for c in doc.captions:
+            #    text += str(c)
+            # sentence_list = [{"text": text}]
             doc_embeddings = self.angle.encode(sentence_list, to_numpy=False)
 
             all_embeddings.append(doc_embeddings)

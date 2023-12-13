@@ -40,7 +40,7 @@ for i, video in enumerate(video_to_sentence_mapping):
              # print(doc_name)
             # preds[sentence].append(doc_name)
 
-preds_path = Path(f"/home/ubuntu/csc2508/MSR-VTT/13b_angle_framewise_{pool}_llama2.json") 
+preds_path = Path(f"/home/ubuntu/csc2508/MSR-VTT/13b_angle_framewise_{pool}.json") 
 with open(str(preds_path), "w") as f:
     json.dump(preds, f)
 
