@@ -4,7 +4,7 @@ from pathlib import Path
 import json
 
 device = "cuda"
-pool = "mean"
+pool = "max"
 text_model = AngleEmbeddings(device, pool=pool)
 doc_dir = "/home/ubuntu/csc2508/MSR-VTT/llava_docs_13b/"
 text_model.build_index(doc_dir)
@@ -40,7 +40,7 @@ for i, video in enumerate(video_to_sentence_mapping):
              # print(doc_name)
             # preds[sentence].append(doc_name)
 
-preds_path = Path(f"/home/ubuntu/csc2508/MSR-VTT/13b_angle_framewise_{pool}.json") 
+preds_path = Path(f"/home/ubuntu/csc2508/MSR-VTT/13b_angle_framewise_{pool}_llama2.json") 
 with open(str(preds_path), "w") as f:
     json.dump(preds, f)
 
