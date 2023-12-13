@@ -1,16 +1,19 @@
-from video_retrieval_models.text_models.doc_level_angle_embeddings import DocLevelAngleEmbeddings
+from video_retrieval_models.text_models.angle_embeddings import AngleEmbeddings
+from video_retrieval_models.text_models.bm25_doc import BM25ModelDocRetrieval
+from video_retrieval_models.text_models.doc_level_sentence_transformer import DocLevelSentenceTransformerModel
 from pathlib import Path
 import json
 
 device = "cuda"
 # Best so far:
-text_model = DocLevelAngleEmbeddings(device, pool="mean") 
+text_model = BM25ModelDocRetrieval()
 
-doc_dir = "/home/ubuntu/csc2508/MSR-VTT/llava_docs_13b_no_audio/"
+# text_model = DocLevelSentenceTransformerModel(device, model_name="multi-qa-distilbert-cos-v1", pool="max") #, use_l2=True, use_cosine=False)
+doc_dir = "/home/ubuntu/csc2508/MSR-VTT/llava_docs_13b/"
 text_model.build_index(doc_dir)
 
 # 1. Load Queries
-msr_path = Path("/home/ubuntu/csc2508/MSR-VTT") 
+msr_path = Path("/home/ubuntu/csc2508/MSR-VTT/") 
 with open(str(Path(msr_path / "train_val_annotation/val_info.json")), "r") as f:
     val_info = json.load(f)
 
@@ -40,7 +43,7 @@ for i, video in enumerate(video_to_sentence_mapping):
              # print(doc_name)
             # preds[sentence].append(doc_name)
 
-preds_path = Path("/home/ubuntu/csc2508/MSR-VTT/doc_level_angle_preds_13b_no_audio.json") 
+preds_path = Path("/home/ubuntu/csc2508/MSR-VTT/13b_bm25.json") 
 with open(str(preds_path), "w") as f:
     json.dump(preds, f)
 

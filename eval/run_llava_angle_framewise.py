@@ -1,16 +1,18 @@
-from video_retrieval_models.text_models.doc_level_angle_embeddings import DocLevelAngleEmbeddings
+from video_retrieval_models.text_models.angle_embeddings import AngleEmbeddings
+from video_retrieval_models.text_models.doc_level_sentence_transformer import DocLevelSentenceTransformerModel
 from pathlib import Path
 import json
 
 device = "cuda"
 # Best so far:
-text_model = DocLevelAngleEmbeddings(device, pool="mean") 
+text_model = AngleEmbeddings(device)
 
-doc_dir = "/home/ubuntu/csc2508/MSR-VTT/llava_docs_13b_no_audio/"
+# text_model = DocLevelSentenceTransformerModel(device, model_name="multi-qa-distilbert-cos-v1", pool="max") #, use_l2=True, use_cosine=False)
+doc_dir = "/home/ubuntu/csc2508/MSR-VTT/llava_docs_13b/"
 text_model.build_index(doc_dir)
 
 # 1. Load Queries
-msr_path = Path("/home/ubuntu/csc2508/MSR-VTT") 
+msr_path = Path("/home/ubuntu/csc2508/MSR-VTT/") 
 with open(str(Path(msr_path / "train_val_annotation/val_info.json")), "r") as f:
     val_info = json.load(f)
 
@@ -19,7 +21,7 @@ sentence_to_video_mapping = val_info["sentence_to_video_mapping"]
 
 preds = {}
 
-topk = 100
+topk = 20
 for i, video in enumerate(video_to_sentence_mapping):
     # print(f"Processing video [{i}/{len(text_model.corpus)}]")
     if video not in text_model.corpus:
@@ -32,7 +34,7 @@ for i, video in enumerate(video_to_sentence_mapping):
             continue
         print(f"Trying to retrieve sentence: {sentence}")
         # docs = text_model.retrieve(sentence, topk=topk)
-        docs = text_model.retrieve(sentence, topk=topk)
+        docs = text_model.retrieve_unique(sentence, topk=topk)
         preds[sentence] += docs
         print(docs)
         # for 
@@ -40,7 +42,7 @@ for i, video in enumerate(video_to_sentence_mapping):
              # print(doc_name)
             # preds[sentence].append(doc_name)
 
-preds_path = Path("/home/ubuntu/csc2508/MSR-VTT/doc_level_angle_preds_13b_no_audio.json") 
+preds_path = Path("/home/ubuntu/csc2508/MSR-VTT/13b_angle_framewise.json") 
 with open(str(preds_path), "w") as f:
     json.dump(preds, f)
 
