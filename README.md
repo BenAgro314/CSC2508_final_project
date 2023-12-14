@@ -1,4 +1,4 @@
-# CSC2508_final_project
+# Final Project for CSC2508: Zero-Shot Video Retrieval With Vision Language Models
 
 ## System Requirements
 
