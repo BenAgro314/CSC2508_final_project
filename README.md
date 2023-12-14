@@ -1,5 +1,10 @@
 # Final Project for CSC2508: Zero-Shot Video Retrieval With Vision Language Models
 
+## Google Colab Demo
+
+You can find a google colab demo here: https://colab.research.google.com/drive/1yzXtIWKpKGXke4TqUAGQMtrVbSj_PRsh?usp=sharing,
+which you can use to run video retrieval on your data.
+
 ## System Requirements
 
 - Ubuntu 20.04
