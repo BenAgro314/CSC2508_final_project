@@ -11,7 +11,7 @@ from angle_emb import AnglE, Prompts
 # TODO: document level search (heirarchical)
 class DocLevelAngleEmbeddings:
 
-    def __init__(self, device, model_name=None, pool="mean"):
+    def __init__(self, device, pool="mean"):
         self.corpus = None
         self.index = None
         self.index_to_doc = None
@@ -22,20 +22,6 @@ class DocLevelAngleEmbeddings:
         self.name = "angle"
 
         self.cosine_sim = torch.nn.CosineSimilarity(dim=1)
-
-    def load_checkpoint(self, faiss_path: str, json_path: str):
-        self.index = faiss.read_index(faiss_path)
-        with open(json_path, "r") as f:
-            data = json.load(f)
-            self.index_to_doc = data["index_to_doc"]
-
-    def save_checkpoint(self, faiss_path: str, json_path: str):
-        faiss.write_index(self.index, faiss_path)
-        with open(json_path, "w") as f:
-            data = {
-                "index_to_doc": self.index_to_doc,
-            }
-            json.dump(data, f, indent=4)
 
     def build_index(self, text_dir_path: str) -> None:
         name = self.name  + "_" + self.pool

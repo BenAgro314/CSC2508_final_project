@@ -87,31 +87,3 @@ class AngleEmbeddings:
 
         topk_inds = torch.topk(doc_scores, k=topk, dim=0).indices
         return [self.corpus[k.item()].name for k in topk_inds]
-
-    def retrieve_unique(self, query: str, topk: int = 10) -> List:
-        query_embedding = self.angle.encode({'text': query}, to_numpy=False)
-
-        # best_docs = set()
-        best_docs = OrderedSet([])
-        search_topk = 30
-
-        while len(best_docs) < topk:
-            print(search_topk)
-            cosine_sims = self.cosine_sim(
-                query_embedding,
-                self.all_embeddings
-            )
-
-            indices = torch.topk(cosine_sims, k=search_topk, dim=0).indices
-
-            for ind in indices:
-                for doc_name in self.doc_to_embedding_index:
-                    if ind >= self.doc_to_embedding_index[doc_name][0] and ind < self.doc_to_embedding_index[doc_name][1]:
-                        best_docs.add(doc_name)
-                    
-            search_topk *= 2
-
-        out = list(best_docs[:topk])
-        assert len(out) == topk
-        return out
-

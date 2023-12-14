@@ -67,7 +67,7 @@ Here is a code snippet for example text retrieval using `AnglE` embeddings:
 ```python
 from video_retrieval_models.text_models.angle_embeddings import AngleEmbeddings
 device = "cuda"
-pool = "max"
+pool = "max" # indicates we are using the `max` over the per-caption scores. You can also use `mean` (worse performance)
 text_model = AngleEmbeddings(device, pool=pool)
 doc_dir = "/docs"
 text_model.build_index(doc_dir)
@@ -77,3 +77,6 @@ topk = 10
 for query in queries:
     docs = text_model.retrieve(sentence, topk=topk) # list of `topk` document names
 ```
+Other retrieval options include
+`BM25ModelDocRetrieval`, `DocLevelAngleEmbeddings` (using `mean` or `max` pooling on the per-caption embeddings
+to generate a document-level embedding), and `DocLevelSentenceTransformerModel` .
