@@ -94,11 +94,15 @@ evaluation/llava_13b_docs/*.json
 ```
 
 You can run evaluation on the `1k-A` split of MSR-VTT using these documents with the following command:
-```
+```bash
 python evaluation/run_llava_angle_framewise.py
 ```
 which will generate top-10 predictions for all query sentences in the test set, stored in `evaluation/13b_angle_max_sim.json`.
 Then you can run recall metrics with the following command:
-```
+```bash
 python evaluation/run_metrics.py evaluation/13b_angle_max_sim.json
+```
+which will return the following results:
+```
+Recall metrics: {1: 0.388194209755548, 5: 0.6296045961473471, 10: 0.7297510420187}
 ```
