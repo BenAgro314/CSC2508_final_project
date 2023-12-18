@@ -1,16 +1,18 @@
 from video_retrieval_models.text_models.angle_embeddings import AngleEmbeddings
-from video_retrieval_models.text_models.doc_level_sentence_transformer import DocLevelSentenceTransformerModel
+import pathlib
 from pathlib import Path
 import json
+
+curr_path = pathlib.Path(__file__).parent.resolve()
 
 device = "cuda"
 pool = "max"
 text_model = AngleEmbeddings(device, pool=pool)
-doc_dir = "llava_13b_docs"
+doc_dir = str(Path(curr_path / "llava_13b_docs"))
 text_model.build_index(doc_dir)
 
 # 1. Load Queries
-msr_path = Path("./") 
+msr_path = curr_path
 with open(str(Path(msr_path / "test_info.json")), "r") as f:
     val_info = json.load(f)
 
@@ -40,7 +42,7 @@ for i, video in enumerate(video_to_sentence_mapping):
              # print(doc_name)
             # preds[sentence].append(doc_name)
 
-preds_path = Path(f"13b_angle_{pool}_sim.json") 
+preds_path = Path(curr_path / f"13b_angle_{pool}_sim.json") 
 with open(str(preds_path), "w") as f:
     json.dump(preds, f)
 
