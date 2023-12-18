@@ -8,7 +8,7 @@ which you can use to run video retrieval on your data.
 ## System Requirements
 
 - Ubuntu 20.04
-- Nvidia GPU with at least 14GB of memory
+- Nvidia GPU with at least 22GB of memory
 - CUDA Version >= 12.0
 - Python version >= 3.8
 
@@ -97,7 +97,8 @@ You can run evaluation on the `1k-A` split of MSR-VTT using these documents with
 ```bash
 python evaluation/run_llava_angle_framewise.py
 ```
-which will generate top-10 predictions for all query sentences in the test set, stored in `evaluation/13b_angle_max_sim.json`.
+which will generate top-10 predictions for all query sentences in the test set, stored in `evaluation/13b_angle_max_sim.json` (we have also already provided this file if
+you don't have the hardware to run the above command).
 Then you can run recall metrics with the following command:
 ```bash
 python evaluation/run_metrics.py evaluation/13b_angle_max_sim.json
