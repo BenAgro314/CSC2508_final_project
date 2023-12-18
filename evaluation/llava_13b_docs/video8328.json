@@ -1,0 +1,31 @@
+{
+    "captions": [
+        " The image features a person sitting at a desk, working on a computer. The person is focused on the computer screen, which is displaying a green screen. The computer setup includes a keyboard and a mouse, with the keyboard placed in front of the person and the mouse on the right side of the desk. The person appears to be using the computer for work or personal tasks, possibly utilizing the various utility programs available on the computer.",
+        " The image features a person sitting in front of a computer with a keyboard and a computer screen displays a green text on the screen, in the word \"shell\" on the person is a keyboard and a mouse, which the person is in front of them. The person is using the right side of the desk. The person appears to be engaged in some task, possibly for leis likely using one of the utility programs available on the computer.",
+        " The image features a computer screen displaying a large blue cube with a red square inside of it. The cube is labeled with the word \"shell\" on it. The screen is filled with a variety of different programs, which are likely part of the operating system or software installed on the computer. These programs may include utilities, applications, and other tools that help the user perform various tasks and manage the computer's functions. The presence of these programs indicates that the computer is actively being used or is ready for use by the user.",
+        " The image features a computer screen displaying a graphical representation of a computer kernel, which is the central part of an operating system. The kernel is surrounded by a blue background, and there is a red dot in the center of the image, which is likely the focus of the scene. The screen also shows a few other smaller images, possibly related to the kernel or other aspects of the operating system. The overall scene suggests that the image is a visual representation of the inner workings of a computer system, with the kernel being the central component that manages and controls the system's resources and processes.",
+        " The image features a computer screen displaying a graphical representation of a computer system, with a large blue box in the center. The box is labeled \"Kernel,\" which is the central part of an operating system that manages the computer's resources and controls the execution of programs. The box is surrounded by smaller boxes, which are labeled \"Utilities.\" These utilities are various programs that perform specific tasks to help manage and maintain the computer system. The image also shows a small red box labeled \"Shell,\" which is the command-line interface that allows users to interact with the computer system and execute commands. The overall scene represents the different components of a computer system and their functions.",
+        " The image features a computer screen displaying a graphical representation of a computer system, with a large red box in the center labeled \"Kernel.\" The box is surrounded by smaller boxes, one of which is labeled \"Shell\" and another labeled \"Utilities.\" The image also includes a smaller box labeled \"Kernel\" located above the larger box, and a box labeled \"Shell\" below it. The arrangement of these boxes suggests a hierarchical relationship between the different components of the computer system.",
+        " The image features a computer screen displaying a large blue cube with a red square in the center. The cube is labeled with the word \"Kernel\" on the top left side and \"Shell Utilities\" on the bottom right side. The image is a close-up of the cube, which is likely a part of a computer program or software. The combination of the blue cube and the labels suggests that the image might be related to computer programming or software development.",
+        " The image shows a computer screen displaying a graphical representation of a computer program with a green box labeled \"Kernel\" and a blue box labeled \"Utilities.\" The green box is positioned above the blue box, and both are placed in the center of the screen. The image suggests that the computer is being used for tasks such as editing a file or sorting a bunch of numbers. The presence of the two boxes indicates that the computer is likely being used for various tasks that require different functionalities, with the green box representing the kernel providing the core functionality and the blue box representing additional utilities or tools to assist in the tasks.",
+        " The image shows a computer screen displaying a list of states in the United States, with the names of the states arranged in alphabetical order. The list includes states such as California, Colorado, Connecticut, New York, North Carolina, and New Jersey. The screen is likely part of a computer program or application that allows users to select or input information related to these states, such as their location or a specific task associated with them. The screen is white and the text is displayed in black, making it easy to read and navigate.",
+        " The image shows a computer screen displaying a list of states in the United States of America, with the names of the states arranged in alphabetical order. The list includes states such as California, Colorado, Connecticut, New York, North Carolina, and Ohio. The screen is filled with text, and the font is white, making it easy to read. The screen is likely used for tasks like editing a file or sorting a bunch of numbers, as it is a computer screen with a list of states displayed.",
+        " The image shows a computer screen displaying a list of states in the United States of America, with each state's name and abbreviation. The list includes California, Colorado, Connecticut, Delaware, North Carolina, Ohio, and New York. The screen is likely part of a computer program or application that allows the user to select a specific state from the list for further processing or data input."
+    ],
+    "fps": 29.97002997002997,
+    "frames": [
+        0,
+        30,
+        60,
+        90,
+        120,
+        150,
+        180,
+        210,
+        240,
+        270,
+        300
+    ],
+    "name": "video8328",
+    "video_path": "/home/ubuntu/TestVideo//video8328.mp4"
+}

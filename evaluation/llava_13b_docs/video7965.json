@@ -1,0 +1,29 @@
+{
+    "captions": [
+        " The image shows a person riding a bicycle down a street, with a car visible in the background. The cyclist appears to be enjoying their ride and is likely going where they wanted to go. The scene captures the essence of a pleasant and leisurely outdoor activity, showcasing the benefits of using a bicycle for transportation and exercise.",
+        " The image shows a person riding a bicycle down a street, with a car visible in the background. The cyclist appears to be enjoying their ride, as happy that their intended to go. The street is surrounded by trees, adding a touch of nature to the urban environment. The cyclist's the convenience and freedom of bicycles as a mode of travel.",
+        " The image shows a person riding a bicycle on a road, with a car following behind them. The person is wearing a white shirt and appears to be enjoying their ride. The car is positioned behind the cyclist, and the cyclist is riding in front of a mirror, which is visible in the image. The scene suggests that the cyclist is confidently navigating the road, and the car is maintaining a safe distance behind them.",
+        " The image shows a car's side view mirror, capturing a scene of a road with a person walking on the sidewalk. The person is carrying a handbag, and there is a stop sign visible in the background. The car is driving down the road, and the side mirror provides a clear view of the surroundings, including the person and the stop sign. The car appears to be in motion, as it is described as \"really good riding.\"",
+        " The image shows a car driving down a highway with a clear view of the road ahead. The car is positioned in the middle of the road, and there are several other cars in the scene, including one behind and one in front of the car. The car in front is driving at a steady pace, and the car behind is following closely. The scene appears to be captured from the perspective of the driver of the car in front, giving a sense of the road ahead and the surrounding traffic.",
+        " The image shows a car driving on a highway with a truck in front of it. The car is following the truck closely, and the view is captured from the perspective of the car's windshield. The car is positioned behind the truck, and the truck is driving on the left side of the road. The car is driving in the same direction as the truck, and the road appears to be busy with traffic. The car is likely following the truck as it moves down the highway, maintaining a safe distance and adhering to traffic rules.",
+        " The image shows a car's dashboard view from the driver's seat, with the speedometer displaying 60 mph. The car is driving on a highway, and there are other cars in the background. The dashboard also displays the speed limit for the current lane, which is 60 mph. The car is driving in the correct lane, adhering to the speed limit.",
+        " The image shows a car's dashboard view of a vehicle on a highway, with the speedometer displaying 60 mph. The car is driving on a road with a trucks in front of it. The dashboard also displays the speed limit, which is 60 mph. The car is driving in the right lane, and the driver is maintaining a safe speed according to the speed limit.",
+        " The image shows the interior of a car with a driver's view of the dashboard, featuring a steering wheel and a side view mirror. The car is on a highway, and there is a truck visible in the distance. The car's side mirror is reflecting the truck, which is driving in the opposite direction. The car is likely moving, as the driver is looking at the side mirror to keep an eye on the traffic behind them.",
+        " The image shows the interior of a car with a driver's seat view of the side mirror, which is reflecting the rear view of a red car. The car is driving down a street, and the driver is likely in the process of changing lanes. The car's side mirror is positioned on the left side of the car, and the driver's hand is on the steering wheel, indicating that they are actively controlling the vehicle. The scene captures a moment of driving on a highway, with the driver's attention focused on the road and the rear view mirror providing information about the traffic behind them."
+    ],
+    "fps": 30.0,
+    "frames": [
+        0,
+        30,
+        60,
+        90,
+        120,
+        150,
+        180,
+        210,
+        240,
+        270
+    ],
+    "name": "video7965",
+    "video_path": "/home/ubuntu/TestVideo//video7965.mp4"
+}

@@ -1,0 +1,39 @@
+{
+    "captions": [
+        " The image features a black background with a white text that reads \"Car Crash Vidz.\" The text is positioned in the upper left corner of the image.",
+        " The image features a white car driving footage of a car crash videos.\" The car is driving down the road, possibly on a highway, and appears to be the car is the main focus of the scene, with no other vehicles or objects visible in the image.",
+        " The image shows a white car driving down a road, with trees on both sides of the street. The car is positioned in the middle of the road, and there are no other vehicles visible in the scene. The car appears to be traveling at a moderate speed, and there is a person standing on the side of the road, possibly observing the car or waiting to cross the street. The scene seems to be captured from a dashboard camera, providing a first-person perspective of the car's journey.",
+        " The image shows a white car driving down a street, with a person standing on the side of the road. The car is positioned in the middle of the street, and there is a blue sign visible in the background. The scene appears to be captured from a dashboard camera, providing a first-person perspective of the car's journey. The person standing on the side of the road is likely a pedestrian, possibly waiting to cross the street or observing the traffic.",
+        " The image shows a white car driving down a road with a dirt road next to it. The car is positioned in the middle of the road, and there are trees in the background. The scene appears to be captured from a dashboard camera, giving a first-person perspective of the car's view. There are also a few other cars visible in the scene, with one car behind the white car and another one further down the road.",
+        " The image shows a car driving down a road with a dog on the side of the road. The car is white and appears to be moving in the same direction as the other cars on the road. There are a few other cars visible in the scene, including one behind the main car and another one further ahead. The road is surrounded by trees, giving it a more rural or suburban feel. The dog is located on the left side of the road, possibly walking or running alongside it.",
+        " The image shows a car driving down a street with a dog on the road, possibly a small dog, and a cat in the background. The car is driving on the road, and there are other cars in the background, including a white car and a truck. The scene appears to be captured from a dashboard camera, giving a first-person perspective of the road.",
+        " The image shows a street scene with a white car driving down the road, passing by a dog on the side of the road. The dog is walking on the grass next to the street, and it appears to be looking at the car as it drives by. The car is the only vehicle visible in the scene, and it is located in the middle of the image. The dog is positioned towards the left side of the image, closer to the edge of the frame.",
+        " The image shows a dog walking across a street in front of a car. The dog is crossing the street at a crosswalk, and the car is waiting for the dog to finish crossing before it can continue. The dog is in the middle of the street, and the car is positioned behind it. There are a few other cars in the background, one on the left side of the street and another on the right. The scene appears to be captured from the perspective of a car, possibly from the driver's viewpoint.",
+        " The image shows a dog running across a street in the middle of the road, with cars driving traffic behind it. The dog is in the middle of the street, and it appears to be running towards the camera. There are several cars in the background, with one car on the left side of the dog and another on the right. The dog is running in front of a car that is driving towards it. The scene is captured from a first-person perspective, giving the viewer a sense of the dog's perspective as it runs across the street.",
+        " The image shows a dog standing in the middle of a street, looking at the camera. The dog is standing on a crosswalk, and it appears to be looking at the camera as if it is about to cross the street. The dog is located near the center of the scene, and there are cars in the background, with one car on the left side of the dog and another car on the right side. The dog is standing on the road, and it seems to be waiting for the traffic to pass before crossing.",
+        " The image shows a dog walking down the street with a leash on a sidewalk, crossing the street at a crosswalk. The dog is walking in front of a red car, and there are other cars in the background. The dog is walking on the sidewalk, and there is a person walking with it. The scene is captured from a car window, and the dog is walking across the street.",
+        " The image shows a dog walking across a street at a crosswalk, crossing the street in front of a car. The dog is walking on the crosswalk, and the car is stopped on the other side of the street. The dog is looking at the camera, and the car is waiting for the dog to cross the street. The scene is captured from the perspective of the car's windshield, giving a unique view of the dog crossing the street.",
+        " The image shows a dog crossing the street at a crosswalk.",
+        " The image shows a street scene of a road with a crosswalk and a crosswalk. The crosswalk is painted on the street, and there is a car driving lane on the road. The street is empty, with no cars or pedestrians visible in the image. The scene is captured from a first person perspective, giving a sense of depth to the scene."
+    ],
+    "fps": 30.0,
+    "frames": [
+        0,
+        30,
+        60,
+        90,
+        120,
+        150,
+        180,
+        210,
+        240,
+        270,
+        300,
+        330,
+        360,
+        390,
+        420
+    ],
+    "name": "video9622",
+    "video_path": "/home/ubuntu/TestVideo//video9622.mp4"
+}

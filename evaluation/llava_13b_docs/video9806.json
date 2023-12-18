@@ -1,0 +1,29 @@
+{
+    "captions": [
+        " The image features a car driving down a road with a forest in the background. The car is positioned in the center of the scene, and its engine is revving, indicating that it is either accelerating or decelerating. The road appears to be a two-way street, with the car occupying one lane. The forest in the background adds a sense of nature and tranquility to the scene.",
+        " The image shows a car driving down a road, asphalt background. The car is positioned in the center of the scene, and it appears to be revving, indicating that it is either accelerating or decelerating. The road is surrounded by trees, creating a scenic and natural environment adding to the overall atmosphere of the image.",
+        " The image shows a car driving down a road with a clear view of the road ahead. The car is positioned in the middle of the road, and there are no other vehicles visible in the scene. The car is driving towards a fork in the road, with one direction leading to the left and the other to the right. The driver's view is captured through the windshield, providing a sense of depth and perspective to the scene. The image captures the essence of driving on an open road, with the car's engine revving as it approaches the fork in the road.",
+        " The image shows a car driving down a curvy road with a view of the road ahead. The car is positioned in the middle of the road, and there are trees on the side of the road. The car is driving on a highway, and the road appears to be empty.",
+        " The image shows a car driving down a curvy road with a forest in the background. The car is positioned in the middle of the road, and the driver's view is captured through the windshield. The road appears to be empty, with no other vehicles or pedestrians visible in the scene. The car seems to be moving at a moderate speed, and the driver appears to be enjoying the drive.",
+        " The image shows a car driving down a curvy road with a view of the road ahead. The car is positioned in the middle of the scene, and there is a person standing on the side of the road. The road appears to be empty, with no other vehicles or pedestrians visible. The car is driving on a curvy road, which suggests that it is navigating a turn or a hill. The scene is captured from the perspective of the car's windshield, giving the viewer a sense of being inside the vehicle.",
+        " The image shows a car driving down a road with a person standing on the side of the road. The car is positioned on the left side of the image, and the person is standing on the right side of the road. The person appears to be walking or standing near the edge of the road, possibly waiting to cross or observing the traffic. The scene is captured from the perspective of the car's windshield, giving a sense of the car's movement and the person's presence on the side of the road.",
+        " The image shows a car's windshield with a reflection of a street sign in the windshield. The reflection shows a red and white sign with an arrow pointing to the left. The car is driving down a road with a forest in the background. The scene appears to be captured from the perspective of the driver's seat, giving a sense of depth and perspective to the image.",
+        " The image shows a car driving scene from the perspective of the driver's seat, looking out through the windshield. The car is traveling down a road with a white line in the middle, indicating that it is a two-way street. The road is surrounded by trees, giving a sense of a rural or suburban setting. The car is the only vehicle visible on the road, and there are no other cars or pedestrians in sight. The view is captured through the windshield, giving a sense of depth and perspective to the scene.",
+        " The image shows a view from the perspective of a car windshield, looking down a long, empty road with a yellow sign on the side of the road. The road appears to be a highway, and there are trees in the background. The image is captured in black and white, giving it a vintage feel. The car is driving down the road, and the view is captured from the driver's perspective."
+    ],
+    "fps": 25.0,
+    "frames": [
+        0,
+        25,
+        50,
+        75,
+        100,
+        125,
+        150,
+        175,
+        200,
+        225
+    ],
+    "name": "video9806",
+    "video_path": "/home/ubuntu/TestVideo//video9806.mp4"
+}
